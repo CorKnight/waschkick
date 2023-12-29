@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    {% block head %}
+        <title>WWW - Wäschewascher Web</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-thin-straight/css/uicons-thin-straight.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+        <script src="/static/javascripts/main.js"></script>
+    {% endblock %}
+</head>
+<body onload="createBubble(18)">
+{#    <div class="background">#}
+{#        <div class="background-diagonal" id="bg1"></div>#}
+{#        <div class="background-diagonal" id="bg2"></div>#}
+{#        <div class="background-diagonal" id="bg3"></div>#}
+{#    </div>#}
+    <div class="website-wrapper">
+        <div id="heading">
+            {% block back %}{% endblock %}
+            <div id="align-heading">
+                <div class="flex-row" id="text-first-row">
+                    <p class="h1" id="text-clothing">WEB</p>
+                    <p id="text-middle">der</p>
+                </div>
+                <p class="h1" id="text-clothing-basket">WÄSCHEWÄSCHER</p>
+            </div>
+        </div>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+        <form id="form" method="get">
+            <div id="sidebar" class="sidebar">
+                {% block sidebar %}
+{#                    <div class="sidebar-background-rect"></div>#}
+{#                    <div class="sidebar-background-rect" id="sidebar-bg2"></div>#}
+{#                    <div class="sidebar-background-rect" id="sidebar-bg3"></div>#}
+                    <div class="flex-col" id="sidebar-content">
+                        <div id="sidebar-header">
+                            <i class="fi fi-rr-shopping-basket" id="icon-sidebar-header"></i>
+                            <h2>Wäschekorb</h2>
+                        </div>
+                        <span class="divider"></span>
+                        <div class="sidebar-item-background" id="sidebar_item">
+                            <div class="sidebar-item">
+                                <input class="input-cloth-color" type="hidden">
+                                <i class="fi fi-rr-trash sidebar-icon trash-icon" onclick="deleteSidebarElement(this.parentNode.parentElement)"></i>
+                                <div class="sidebar-item-content">
+                                    <i class="sidebar-icon"></i>
+                                    <p class="sidebar-text">Socken</p>
+                                </div>
+                            </div>
+                        </div>
+                            {% for cloth, val in list.items() %}
+                                {% for color in val["colors"] %}
+                                    <div class="sidebar-item-background bg-{{ color }} sidebar-item-flag" id="sidebar_item_{{ color }}_{{ cloth }}">
+                                        <div class="sidebar-item">
+                                            <i class="fi fi-rr-trash sidebar-icon trash-icon" onclick="deleteSidebarElement(this.parentNode.parentElement)"></i>
+                                            <input type="hidden" value="{{ color }}" name="{{ cloth }}">
+                                            <div class="sidebar-item-content">
+                                                <i class="{{ list[cloth]["iconPath"] }} sidebar-icon"></i>
+                                                <p class="sidebar-text">{{ cloth }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                    </div>
+                    <div class="flex-col">
+                        <button class="button-sidebar" id="sidebar-button" form="form" formaction="/washing/">
+                            Wäsche waschen
+                        </button>
+                        <a class="button-sidebar clear-basket" onclick="clearBasket('form')">
+                            Wäschekorb leeren
+                        </a>
+                    </div>
+                {% endblock %}
+            </div>
+        </form>
+    </div>
+    <div id="footer">
+        {% block footer %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="clothes-card-area">
+        {% for cloth in list %}
+            <div class="clothes-card">
+                <i class="{{ list[cloth]["iconPath"] }} icon-sidebar"></i>
+                <p>{{ cloth }}</p>
+                <span class="hover-divider"></span>
+                <div class="color-container">
+                    <label class="color-label">
+                        <input type="checkbox"
+                               name="{{ cloth }}"
+                               class="color-checkbox white-checkbox"
+                               id="white_{{ cloth }}"
+                               value="white"
+                                {% if list|length > 0 and "white" in list[cloth]["colors"] %}
+                               checked
+                                {% endif %}
+                               onclick="checkState(this)">
+                        <i class="fi fi-sr-square-plus"></i>
+                        <i class="fi fi-sr-square-minus"></i>
+                    </label>
+                    <label class="color-label">
+                        <input type="checkbox"
+                               name="{{ cloth }}"
+                               class="color-checkbox dark-checkbox"
+                               id="dark_{{ cloth }}"
+                               value="dark"
+                                {% if list|length > 0 and "dark" in list[cloth]["colors"] %}
+                               checked
+                                {% endif %}
+                               onclick="checkState(this)">
+                        <i class="fi fi-sr-square-plus"></i>
+                        <i class="fi fi-sr-square-minus"></i>
+                    </label>
+                    <label class="color-label">
+                        <input type="checkbox"
+                               name="{{ cloth }}"
+                               class="color-checkbox blue-checkbox"
+                               id="blue_{{ cloth }}"
+                               value="blue"
+                                {% if list|length > 0 and "blue" in list[cloth]["colors"] %}
+                               checked
+                                {% endif %}
+                               onclick="checkState(this)">
+                        <i class="fi fi-sr-square-plus"></i>
+                        <i class="fi fi-sr-square-minus"></i>
+                    </label>
+                    <label class="color-label">
+                        <input type="checkbox"
+                               name="{{ cloth }}"
+                               class="color-checkbox yellow-checkbox"
+                               id="yellow_{{ cloth }}"
+                               value="yellow"
+                                {% if list|length > 0 and "yellow" in list[cloth]["colors"] %}
+                               checked
+                                {% endif %}
+                               onclick="checkState(this)">
+                        <i class="fi fi-sr-square-plus"></i>
+                        <i class="fi fi-sr-square-minus"></i>
+                    </label>
+                    <label class="color-label">
+                        <input type="checkbox"
+                               name="{{ cloth }}"
+                               class="color-checkbox red-checkbox"
+                               id="red_{{ cloth }}"
+                               value="red"
+                                {% if list|length > 0 and "red" in list[cloth]["colors"] %}
+                               checked
+                                {% endif %}
+                               onclick="checkState(this)">
+                        <i class="fi fi-sr-square-plus"></i>
+                        <i class="fi fi-sr-square-minus"></i>
+                    </label>
+                    <label class="color-label">
+                        <input type="checkbox"
+                               name="{{ cloth }}"
+                               class="color-checkbox green-checkbox"
+                               id="green_{{ cloth }}"
+                               value="green"
+                                {% if list|length > 0 and "green" in list[cloth]["colors"] %}
+                               checked
+                                {% endif %}
+                               onclick="checkState(this)">
+                        <i class="fi fi-sr-square-plus"></i>
+                        <i class="fi fi-sr-square-minus"></i>
+                    </label>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

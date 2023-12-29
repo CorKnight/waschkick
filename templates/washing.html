@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block back %}
+    <button class="button" id="button-back" onclick="window.location.href='/'">
+        <i class="fi fi-rr-angle-left"></i>
+    </button>
+{% endblock %}
+{% block content %}
+    <div class="washing-card-area">
+        {% for (washer, instructions) in washingDict.items() %}
+            <div class="washing-card">
+                <div class="washing-card-content-area">
+                    <i class="fi fi-ts-washer washing-card-icon"></i>
+                </div>
+                <span class="y-hover-divider y-top-hover-divider"></span>
+                <div class="washing-card-content-area">
+                    <p class="h2 washing-card-heading">{{ washer }}</p>
+                    <div class="washing-card-content-wrapper">
+                        {% for cloth, colors in instructions["clothes"].items() %}
+                            {% for color in colors %}
+                                <div class="washing-card-content">
+                                    <i class="{{ list[cloth]["iconPath"] }} washing-card-content-icon fg-{{ color }}"></i>
+                                    <p class="washing-card-content-text">{{ cloth }}</p>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <span class="y-hover-divider y-bottom-hover-divider"></span>
+                <div class="washing-card-content-area">
+                    <p class="h2 washing-card-heading">Waschzutaten</p>
+                    <div class="washing-card-content-wrapper grid-container">
+                        <div class="washing-card-content grid-item">
+                            <i class="fi fi-rr-thermometer-three-quarters washing-card-content-icon"></i>
+                            <p class="washing-card-content-text">{{ instructions["temperature"] }}</p>
+                        </div>
+                        <div class="washing-card-content">
+                            <i class="fi fi-rr-browser washing-card-content-icon"></i>
+                            <p class="washing-card-content-text">{{ instructions["program"] }}</p>
+                        </div>
+                        <div class="washing-card-content">
+                            <i class="fi fi-rr-soap washing-card-content-icon"></i>
+                            <p class="washing-card-content-text">{{ instructions["softener"] }}</p>
+                        </div>
+                        <div class="washing-card-content">
+                            <i class="fi fi-rr-soap-alt washing-card-content-icon"></i>
+                            <p class="washing-card-content-text">{{ instructions["detergent"] }}</p>
+                        </div>
+                        <div class="washing-card-content grid-item-1-2 italic">
+                            <i class="fi fi-rr-lightbulb-exclamation washing-card-content-icon"></i>
+                            <p class="washing-card-content-text">{{ instructions["comments"][0] }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="divider-main-page"></span>
+        {% endfor %}
+    </div>
+{% endblock %}
